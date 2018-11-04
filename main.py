@@ -17,11 +17,12 @@ for i in range(data.shape[0]):
 #mpl.show()
 ###
 
-clusters = KMeans(n_clusters=5, random_state=0).fit_predict(data)
+### K-means с выводом результата на экран в виде графика
+clusters = KMeans(n_clusters=3, random_state=0).fit_predict(data) #n_clusters - кол-во кластеров
 fig = mpl.figure()
 ax = fig.add_subplot(111, projection='3d')
 colors = []
-for i in range(len(clusters)):
+for i in range(len(clusters)): #перечисление используемых цветов (костыль для белых точек на белом фоне)
     if (clusters[i] == 0):
         colors.append('r')
     if (clusters[i] == 1):
@@ -34,3 +35,4 @@ for i in range(len(clusters)):
         colors.append('black')
 ax.scatter(data[:,1],data[:,2], data[:,0], color = colors , cmap=mpl.hot())
 mpl.show()
+###
