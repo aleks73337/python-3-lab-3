@@ -6,16 +6,22 @@ import pandas as pd
 from pylab import *
 import matplotlib.pyplot as mpl
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn import preprocessing
 
 data = pd.read_csv('quake.csv', sep=',')
 data = data.values
 for i in range(data.shape[0]):
-    data[i,2] = data[i,2] + 150
-    data[i,2] = (data[i,2] + 150) % 300 - 150
+    data[i,1] = data[i,1] + 90
+    data[i,2] = data[i,2] + 180
+    data[i,2] = (data[i,2] + 180) % 360
+
+scaler = preprocessing.MinMaxScaler(feature_range=(0,1))
+data = scaler.fit_transform(data)
 
 data_dist = pdist(data, 'euclidean')
 data_linkage = linkage(data_dist, method='ward')
-flat_clusters = fcluster(data_linkage, 5, 'maxclust')
+flat_clusters = fcluster(data_linkage, 4, 'maxclust', depth = 6)
+dendrogram(data_linkage)
 
 fig = mpl.figure()
 ax = fig.add_subplot(111, projection='3d')
