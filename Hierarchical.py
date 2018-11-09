@@ -20,7 +20,7 @@ data = scaler.fit_transform(data)
 
 data_dist = pdist(data, 'euclidean')
 data_linkage = linkage(data_dist, method='ward')
-flat_clusters = fcluster(data_linkage, 4, 'maxclust', depth = 6)
+flat_clusters = fcluster(data_linkage, 5, 'maxclust', depth = 6)
 dendrogram(data_linkage)
 
 fig = mpl.figure()

@@ -27,18 +27,21 @@ np.savetxt("norm_data.csv", data, delimiter=';', fmt='%.3f')
 ###
 
 ###Метод каменной осыпи
-#NumClust = range(1,20,1)
+#NumClust = range(1,50,1)
 #kmeans = [KMeans(n_clusters=i, random_state=0) for i in NumClust] #n_clusters - кол-во кластеров
 #fit = [kmeans[i-1].fit(data) for i in NumClust]
 #clusters = [kmeans[i-1].predict(data) for i in NumClust]
-#scores = [kmeans[i-1].score(data) for i in NumClust]
+#scores = [kmeans[i-1].inertia_ for i in NumClust]
+#print(scores)
 #mpl.plot(NumClust, scores)
+#mpl.ylim(0,300)
+#mpl.xlim(5,100)
+#mpl.show()
 #mpl.savefig('k-means_cluster_numbers')
 ###
 
-
 ## K-means с выводом результата на экран в виде графика
-clusters = KMeans(n_clusters=4, max_iter=10000, precompute_distances=True).fit_predict(data)
+clusters = KMeans(n_clusters=5, max_iter=10000, precompute_distances=True).fit_predict(data)
 fig = mpl.figure()
 ax = fig.add_subplot(111, projection='3d')
 colors = []
